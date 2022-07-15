@@ -70,7 +70,7 @@ namespace OneNote2AnkiWinFormNET
         private void button1_Click(object sender, EventArgs e)
         {
             // Load required files            
-            string page_path = @"C:\Users\steve\OneDrive - ualberta.ca\Coding\OneNote2AnkiPython\Export.xml"; // Placeholder for page XML export, Python scripts refer to the same directory
+            string page_path = @"C:\Users\steve\OneDrive - ualberta.ca\Coding\OneNote2AnkiWinFormNET\python_assets\export.xml"; // Placeholder for page XML export, Python scripts refer to the same directory
 
             // Tree parsing
             List<TreeNode> selected_nodes = new List<TreeNode>();
@@ -113,7 +113,7 @@ namespace OneNote2AnkiWinFormNET
 
             // Script and arguments 
             string version = textBox1.Text;
-            var script = $@"C:\Users\steve\OneDrive - ualberta.ca\Coding\OneNote2AnkiPython\Version {version}.py";
+            var script = $@"C:\Users\steve\OneDrive - ualberta.ca\Coding\OneNote2AnkiWinFormNET\main.py";
             var file_name = "Export.xml";
 
             psi.Arguments = $"\"{script}\" {file_name}"; // File name should not be enclosed in brackets since it is taken literally in the file name
@@ -130,7 +130,7 @@ namespace OneNote2AnkiWinFormNET
         private void button2_Click(object sender, EventArgs e)
         {
             // Load required files            
-            string page_path = @"C:\Users\steve\OneDrive - ualberta.ca\Coding\OneNote2AnkiPython\Export.xml"; // Placeholder for page XML export, Python scripts refer to the same directory
+            string page_path = @"C:\Users\steve\OneDrive - ualberta.ca\Coding\OneNote2AnkiWinFormNET\python_assets\export.xml"; // Placeholder for page XML export, Python scripts refer to the same directory
 
             // Tree parsing
             List<TreeNode> selected_nodes = new List<TreeNode>();
