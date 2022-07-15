@@ -17,7 +17,11 @@ namespace OneNote2AnkiWinFormNET
     public partial class Form1 : Form
     {
         // Make global OneNote instance
-        Microsoft.Office.Interop.OneNote.Application onApplication = new Microsoft.Office.Interop.OneNote.Application(); 
+        Microsoft.Office.Interop.OneNote.Application onApplication = new Microsoft.Office.Interop.OneNote.Application();
+        public string XML_PATH = @"C:\Users\steve\OneDrive - ualberta.ca\Coding\OneNote2AnkiWinFormNET\python_assets\export.xml";
+        public string PYTHON = @"C:\Users\steve\.conda\envs\onenote2anki\python.exe";
+        public string SCRIPT = $@"C:\Users\steve\OneDrive - ualberta.ca\Coding\OneNote2AnkiWinFormNET\python_assets\main.py"; // -u Parameter to redirect stream
+
 
         public Form1()
         {
@@ -70,7 +74,6 @@ namespace OneNote2AnkiWinFormNET
         private void button1_Click(object sender, EventArgs e)
         {
             // Load required files            
-            string page_path = @"C:\Users\steve\OneDrive - ualberta.ca\Coding\OneNote2AnkiWinFormNET\python_assets\export.xml"; // Placeholder for page XML export, Python scripts refer to the same directory
 
             // Tree parsing
             List<TreeNode> selected_nodes = new List<TreeNode>();
@@ -78,22 +81,22 @@ namespace OneNote2AnkiWinFormNET
             foreach (TreeNode node in selected_nodes)
             {
                 MessageBox.Show($"Found {node.Text}, {node.Name}");
-                String page_xml_str = ""; // Reset the string variable, unsure if necessary 
-                onApplication.GetPageContent($"{node.Name}", out page_xml_str, PageInfo.piBinaryData);
+                string page_xml_str = ""; // Reset the string variable, unsure if necessary 
+                onApplication.GetPageContent($"{node.Name}", out page_xml_str, PageInfo.piBinaryData); //    piBinary to include binary type data
                 XmlDocument page_xml_doc = new XmlDocument();
                 page_xml_doc.LoadXml(page_xml_str);
-                page_xml_doc.Save(page_path); 
+                page_xml_doc.Save(XML_PATH); 
                 runPython();
             }
-            
+
             //XmlNodeList xn_list = hierarchy_xml_doc.SelectNodes($"//*[@name='{}']");
             //MessageBox.Show("Executing main Python process");
-            
 
         }
 
         private void FindCheckedNodes(List<TreeNode> checked_nodes, TreeNodeCollection nodes)
         {
+            // Modifies checked_nodes object that is passed in as argument
             foreach (TreeNode node in nodes)
             {
                 // Add this node.
@@ -106,26 +109,46 @@ namespace OneNote2AnkiWinFormNET
 
         public void runPython()
         {
-            //MessageBox.Show("Run Script here");
-            // New process
-            var psi = new ProcessStartInfo();
-            psi.FileName = @"C:\Users\steve\.conda\envs\venv2\python.exe";
-
-            // Script and arguments 
-            string version = textBox1.Text;
-            var script = $@"C:\Users\steve\OneDrive - ualberta.ca\Coding\OneNote2AnkiWinFormNET\main.py";
-            var file_name = "Export.xml";
-
-            psi.Arguments = $"\"{script}\" {file_name}"; // File name should not be enclosed in brackets since it is taken literally in the file name
-
-            // Process configuration & Running
-            psi.UseShellExecute = false; // For some reason, this needs to be true in order for Python script to work, maybe b/c Python program relies on Shell
-            using (var process = Process.Start(psi))
+            var psi = new ProcessStartInfo
             {
-                process.WaitForExit();
-                MessageBox.Show("Python process finished");
+                FileName = PYTHON,
+                Arguments = $"\"{SCRIPT}\"", // File name should not be enclosed in brackets since it is taken literally in the file name
+                UseShellExecute = false, // For some reason, this needs to be true in order for Python script to work, maybe b/c Python program relies on Shell
+                RedirectStandardInput = true,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                CreateNoWindow = false
+            };
+            var process = new Process
+            {
+            //MessageBox.Show("Run Script here");
+            // New process & configuration
+                StartInfo = psi,
+                EnableRaisingEvents = true
+            };
+
+            process.Start();
+            //process.BeginErrorReadLine(); // Asynchronous methods
+            //process.BeginOutputReadLine();
+            process.WaitForExit();
+
+            string args = textBox1.Text;
+            if (args.IndexOf("debug") >= 0) // Searchs for debug argument
+            {
+                // Redirect output for debugging:
+                // https://www.mathworks.com/matlabcentral/answers/586706-how-to-redirect-standard-input-and-standard-output-using-net-system-diagnostics-process
+                var stdin = process.StandardInput.ToString();
+                MessageBox.Show(stdin);
+                var stdout = process.StandardOutput.ReadToEnd();
+                MessageBox.Show(stdout);
+                var stder = process.StandardError.ReadToEnd();
+                MessageBox.Show(stder);
+
             }
+
+            MessageBox.Show("Python process finished");
         }
+
 
         private void button2_Click(object sender, EventArgs e)
         {
