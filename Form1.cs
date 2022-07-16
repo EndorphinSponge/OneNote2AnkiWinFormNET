@@ -42,13 +42,12 @@ namespace OneNote2AnkiWinFormNET
 
             // Add the root node's children to the TreeView.
             treeView1.Nodes.Clear();
-            AddTreeViewChildNodes(treeView1.Nodes, hierarchy_xml_doc.DocumentElement);
+            addTreeViewChildNodes(treeView1.Nodes, hierarchy_xml_doc.DocumentElement);
         }
 
-
-        // Add the children of this XML node 
-        // to this child nodes collection.
-        private void AddTreeViewChildNodes(TreeNodeCollection parent_nodes, XmlNode xml_node)
+        // =============== Custom functions ==========================
+        // Add the children of this XML node to this child nodes collection.
+        private void addTreeViewChildNodes(TreeNodeCollection parent_nodes, XmlNode xml_node)
         {
             foreach (XmlNode child_node in xml_node.ChildNodes)
             {
@@ -57,7 +56,7 @@ namespace OneNote2AnkiWinFormNET
                 {
                     TreeNode new_node = parent_nodes.Add(child_node.Attributes["ID"].Value, child_node.Attributes["name"].Value);
                     // Recursively make this node's descendants.
-                    AddTreeViewChildNodes(new_node.Nodes, child_node);
+                    addTreeViewChildNodes(new_node.Nodes, child_node);
 
                     // If this is a leaf node, make sure it's visible.
                     //if (new_node.Nodes.Count == 0) new_node.EnsureVisible();
@@ -66,35 +65,7 @@ namespace OneNote2AnkiWinFormNET
             }
         }
 
-        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            // Load required files            
-
-            // Tree parsing
-            List<TreeNode> selected_nodes = new List<TreeNode>();
-            FindCheckedNodes(selected_nodes, treeView1.Nodes);
-            foreach (TreeNode node in selected_nodes)
-            {
-                MessageBox.Show($"Found {node.Text}, {node.Name}");
-                string page_xml_str = ""; // Reset the string variable, unsure if necessary 
-                onApplication.GetPageContent($"{node.Name}", out page_xml_str, PageInfo.piBinaryData); //    piBinary to include binary type data
-                XmlDocument page_xml_doc = new XmlDocument();
-                page_xml_doc.LoadXml(page_xml_str);
-                page_xml_doc.Save(XML_PATH); 
-                runPython();
-            }
-
-            //XmlNodeList xn_list = hierarchy_xml_doc.SelectNodes($"//*[@name='{}']");
-            //MessageBox.Show("Executing main Python process");
-
-        }
-
-        private void FindCheckedNodes(List<TreeNode> checked_nodes, TreeNodeCollection nodes)
+        private void findCheckedNodes(List<TreeNode> checked_nodes, TreeNodeCollection nodes)
         {
             // Modifies checked_nodes object that is passed in as argument
             foreach (TreeNode node in nodes)
@@ -103,7 +74,7 @@ namespace OneNote2AnkiWinFormNET
                 if (node.Checked) checked_nodes.Add(node);
 
                 // Check the node's descendants.
-                FindCheckedNodes(checked_nodes, node.Nodes);
+                findCheckedNodes(checked_nodes, node.Nodes);
             }
         }
 
@@ -121,8 +92,8 @@ namespace OneNote2AnkiWinFormNET
             };
             var process = new Process
             {
-            //MessageBox.Show("Run Script here");
-            // New process & configuration
+                //MessageBox.Show("Run Script here");
+                // New process & configuration
                 StartInfo = psi,
                 EnableRaisingEvents = true
             };
@@ -149,24 +120,51 @@ namespace OneNote2AnkiWinFormNET
             MessageBox.Show("Python process finished");
         }
 
-
-        private void button2_Click(object sender, EventArgs e)
+        public void genXml(bool runpy)
         {
-            // Load required files            
-            string page_path = @"C:\Users\steve\OneDrive - ualberta.ca\Coding\OneNote2AnkiWinFormNET\python_assets\export.xml"; // Placeholder for page XML export, Python scripts refer to the same directory
-
             // Tree parsing
             List<TreeNode> selected_nodes = new List<TreeNode>();
-            FindCheckedNodes(selected_nodes, treeView1.Nodes);
+            findCheckedNodes(selected_nodes, treeView1.Nodes);
             foreach (TreeNode node in selected_nodes)
             {
                 MessageBox.Show($"Found {node.Text}, {node.Name}");
-                String page_xml_str = ""; // Reset the string variable, unsure if necessary 
-                onApplication.GetPageContent($"{node.Name}", out page_xml_str, PageInfo.piBinaryData);
+                string page_xml_str = ""; // Reset the string variable, unsure if necessary 
+                onApplication.GetPageContent($"{node.Name}", out page_xml_str, PageInfo.piBinaryData); //    piBinary to include binary type data
                 XmlDocument page_xml_doc = new XmlDocument();
                 page_xml_doc.LoadXml(page_xml_str);
-                page_xml_doc.Save(page_path);
+                page_xml_doc.Save(XML_PATH);
+                if (runpy)
+                {
+                    runPython();
+                }
             }
+
+            //XmlNodeList xn_list = hierarchy_xml_doc.SelectNodes($"//*[@name='{}']");
+
+        }
+
+        
+
+        // =============== Auto-generated functions ==========================
+
+        private void processPage(object sender, EventArgs e)
+        {
+            genXml(runpy: true);
+        }
+
+        private void genXmlOnly(object sender, EventArgs e)
+        {
+            genXml(runpy: false);
+        }
+
+        private void runPythonOnly(object sender, EventArgs e)
+        {
+            runPython();
+        }
+
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -179,9 +177,6 @@ namespace OneNote2AnkiWinFormNET
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            runPython();
-        }
+
     }
 }
