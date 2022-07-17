@@ -26,9 +26,10 @@ namespace OneNote2AnkiWinFormNET
         public string PYTHON_DEV = $@"{USER}\.conda\envs\onenote2anki\python.exe";
         public string SCRIPT_DEV = $@"{ROOT_SLN}\python_assets\main.py";
 
-        public string XML_LIVE = $@"{ROOT_EXE}\python_assets\export.xml";
-        public string PYTHON_LIVE = $@"{ROOT_EXE}\pyenv\python.exe";
-        public string SCRIPT_LIVE = $@"{ROOT_EXE}\python_assets\main.py";
+        // Note that CMD processes start with same directory as exe, hence don't need ROOT_EXE in these variables
+        public string XML_LIVE = $@"python_assets\export.xml";
+        public string PYTHON_LIVE = $@"pyenv\python.exe";
+        public string SCRIPT_LIVE = $@"python_assets\main.py";
 
 
         public Form1()
