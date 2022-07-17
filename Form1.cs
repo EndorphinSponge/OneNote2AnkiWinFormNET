@@ -22,12 +22,14 @@ namespace OneNote2AnkiWinFormNET
         public static string ROOT_SLN = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName; // Gets parent directory of bin\debug\ folder
         public static string ROOT_EXE = System.Windows.Forms.Application.StartupPath; // Gets directory that contains exe
 
-        public string XML_DEV = $@"{ROOT_SLN}\python_assets\export.xml";
+        public string XML_DEV = $@"{ROOT_SLN}\python_assets\page_xml.xml";
+        public string XMLOUTLINE_DEV = $@"{ROOT_SLN}\python_assets\outline_xml.xml";
         public string PYTHON_DEV = $@"{USER}\.conda\envs\onenote2anki\python.exe";
         public string SCRIPT_DEV = $@"{ROOT_SLN}\python_assets\main.py";
 
         // Note that CMD processes start with same directory as exe, hence don't need ROOT_EXE in these variables
-        public string XML_LIVE = $@"python_assets\export.xml";
+        public string XML_LIVE = $@"python_assets\page_xml.xml";
+        public string XMLOUTLINE_LIVE = $@"python_assets\outline_xml.xml";
         public string PYTHON_LIVE = $@"pyenv\python.exe";
         public string SCRIPT_LIVE = $@"python_assets\main.py";
 
@@ -233,7 +235,26 @@ namespace OneNote2AnkiWinFormNET
             }
         }
 
-
+        private void updateOutline()
+        {
+            // Boilerplate code for switching between dev and live mode
+            string xmloutline_path;
+            if (checkBoxDebug.Checked)
+            {
+                xmloutline_path = XMLOUTLINE_DEV;
+            }
+            else
+            {
+                xmloutline_path = XMLOUTLINE_LIVE;
+            }
+            string hierarchy_str = "";
+            ONENOTE_APP.GetHierarchy(null,
+                Microsoft.Office.Interop.OneNote.HierarchyScope.hsPages, out hierarchy_str);
+            XmlDocument hierarchy_xml_doc = new XmlDocument();
+            hierarchy_xml_doc.LoadXml(hierarchy_str);
+            hierarchy_xml_doc.Save(xmloutline_path);
+            MessageBox.Show("Updated Outline XML");
+        }
         // =============== Auto-generated functions ==========================
 
         private void processPage(object sender, EventArgs e)
@@ -266,23 +287,14 @@ namespace OneNote2AnkiWinFormNET
 
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void buttonCheckPaths(object sender, EventArgs e)
         {
             checkFilePaths();
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void buttonUpdateOutline(object sender, EventArgs e)
         {
-            string arguments = "";
-            if (checkBoxHtml.Checked)
-            {
-                arguments = arguments + "html ";
-            }
-            if (checkBoxCards.Checked)
-            {
-                arguments = arguments + "add ";
-            }
-            MessageBox.Show(arguments);
+            updateOutline();
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)

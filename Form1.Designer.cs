@@ -40,6 +40,7 @@ namespace OneNote2AnkiWinFormNET
             this.checkBoxDebug = new System.Windows.Forms.CheckBox();
             this.checkBoxHtml = new System.Windows.Forms.CheckBox();
             this.checkBoxCards = new System.Windows.Forms.CheckBox();
+            this.button6 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // treeView1
@@ -94,23 +95,23 @@ namespace OneNote2AnkiWinFormNET
             // button4
             // 
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.Location = new System.Drawing.Point(318, 289);
+            this.button4.Location = new System.Drawing.Point(318, 256);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(108, 26);
             this.button4.TabIndex = 6;
             this.button4.Text = "Check Paths";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.button4.Click += new System.EventHandler(this.buttonCheckPaths);
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(318, 321);
+            this.button5.Location = new System.Drawing.Point(318, 288);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(108, 26);
             this.button5.TabIndex = 7;
-            this.button5.Text = "Misc Button";
+            this.button5.Text = "Update Outline";
             this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.button5.Click += new System.EventHandler(this.buttonUpdateOutline);
             // 
             // checkBoxCLI
             // 
@@ -156,6 +157,16 @@ namespace OneNote2AnkiWinFormNET
             this.checkBoxCards.Text = "Add Cards";
             this.checkBoxCards.UseVisualStyleBackColor = true;
             // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(318, 320);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(108, 26);
+            this.button6.TabIndex = 7;
+            this.button6.Text = "Misc Button";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.buttonUpdateOutline);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -166,6 +177,7 @@ namespace OneNote2AnkiWinFormNET
             this.Controls.Add(this.checkBoxDebug);
             this.Controls.Add(this.checkBoxHtml);
             this.Controls.Add(this.checkBoxCLI);
+            this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -194,6 +206,7 @@ namespace OneNote2AnkiWinFormNET
         private System.Windows.Forms.CheckBox checkBoxDebug;
         private System.Windows.Forms.CheckBox checkBoxHtml;
         private System.Windows.Forms.CheckBox checkBoxCards;
+        private System.Windows.Forms.Button button6;
     }
 }
 
