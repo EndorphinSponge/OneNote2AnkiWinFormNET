@@ -3,6 +3,10 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# Custom
+install_dir/
+python_assets/
+
 # User-specific files
 *.rsuser
 *.suo

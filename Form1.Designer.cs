@@ -33,11 +33,11 @@ namespace OneNote2AnkiWinFormNET
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.checkBoxCLI = new System.Windows.Forms.CheckBox();
+            this.checkBoxDebug = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // treeView1
@@ -77,30 +77,6 @@ namespace OneNote2AnkiWinFormNET
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.genXmlOnly);
             // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(318, 376);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(1);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(108, 22);
-            this.textBox1.TabIndex = 3;
-            this.textBox1.Text = "debug";
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(340, 359);
-            this.label1.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 16);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Arguments";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
             // button3
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -120,7 +96,7 @@ namespace OneNote2AnkiWinFormNET
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(108, 26);
             this.button4.TabIndex = 6;
-            this.button4.Text = "Check Python";
+            this.button4.Text = "Check Paths";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -130,9 +106,30 @@ namespace OneNote2AnkiWinFormNET
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(108, 26);
             this.button5.TabIndex = 7;
-            this.button5.Text = "Install Python";
+            this.button5.Text = "Misc Button";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // checkBoxCLI
+            // 
+            this.checkBoxCLI.AutoSize = true;
+            this.checkBoxCLI.Location = new System.Drawing.Point(318, 354);
+            this.checkBoxCLI.Name = "checkBoxCLI";
+            this.checkBoxCLI.Size = new System.Drawing.Size(89, 20);
+            this.checkBoxCLI.TabIndex = 8;
+            this.checkBoxCLI.Text = "CLI Output";
+            this.checkBoxCLI.UseVisualStyleBackColor = true;
+            this.checkBoxCLI.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // checkBoxDebug
+            // 
+            this.checkBoxDebug.AutoSize = true;
+            this.checkBoxDebug.Location = new System.Drawing.Point(318, 376);
+            this.checkBoxDebug.Name = "checkBoxDebug";
+            this.checkBoxDebug.Size = new System.Drawing.Size(108, 20);
+            this.checkBoxDebug.TabIndex = 9;
+            this.checkBoxDebug.Text = "Debug mode";
+            this.checkBoxDebug.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -140,11 +137,11 @@ namespace OneNote2AnkiWinFormNET
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(436, 408);
+            this.Controls.Add(this.checkBoxDebug);
+            this.Controls.Add(this.checkBoxCLI);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.treeView1);
@@ -163,11 +160,11 @@ namespace OneNote2AnkiWinFormNET
         internal System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.CheckBox checkBoxCLI;
+        private System.Windows.Forms.CheckBox checkBoxDebug;
     }
 }
 

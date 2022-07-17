@@ -19,10 +19,16 @@ namespace OneNote2AnkiWinFormNET
         // Make global OneNote instance
         Microsoft.Office.Interop.OneNote.Application ONENOTE_APP = new Microsoft.Office.Interop.OneNote.Application();
         public static string USER = Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile); // Needs to be static for other variables to use it
+        public static string ROOT_SLN = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName; // Gets parent directory of bin\debug\ folder
+        public static string ROOT_EXE = System.Windows.Forms.Application.StartupPath; // Gets directory that contains exe
 
-        public string XML_PATH = $@"{USER}\OneDrive - ualberta.ca\Coding\OneNote2AnkiWinFormNET\python_assets\export.xml";
-        public string PYTHON = $@"{USER}\.conda\envs\onenote2anki\python.exe";
-        public string SCRIPT = $@"{USER}\OneDrive - ualberta.ca\Coding\OneNote2AnkiWinFormNET\python_assets\main.py";
+        public string XML_DEV = $@"{ROOT_SLN}\python_assets\export.xml";
+        public string PYTHON_DEV = $@"{USER}\.conda\envs\onenote2anki\python.exe";
+        public string SCRIPT_DEV = $@"{ROOT_SLN}\python_assets\main.py";
+
+        public string XML_LIVE = $@"{ROOT_EXE}\python_assets\export.xml";
+        public string PYTHON_LIVE = $@"{ROOT_EXE}\pyenv\python.exe";
+        public string SCRIPT_LIVE = $@"{ROOT_EXE}\python_assets\main.py";
 
 
         public Form1()
@@ -82,10 +88,27 @@ namespace OneNote2AnkiWinFormNET
 
         public void runPython()
         {
+            // Boilerplate code for switching between dev and live mode
+            string python_path; // Declare variables but don't assign any values yet 
+            string script_path;
+            string xml_path;
+            if (checkBoxDebug.Checked)
+            { 
+                python_path = PYTHON_DEV;
+                script_path = SCRIPT_DEV;
+                xml_path = XML_DEV;
+            }
+            else
+            {
+                python_path = PYTHON_LIVE;
+                script_path = SCRIPT_LIVE;
+                xml_path = XML_LIVE;
+            }
+
             var psi = new ProcessStartInfo
             {
-                FileName = PYTHON,
-                Arguments = $"\"{SCRIPT}\"", // File name should not be enclosed in brackets since it is taken literally in the file name
+                FileName = python_path,
+                Arguments = $"\"{script_path}\"", // File name should not be enclosed in brackets since it is taken literally in the file name
                 UseShellExecute = false, // For some reason, this needs to be true in order for Python script to work, maybe b/c Python program relies on Shell
                 RedirectStandardInput = true,
                 RedirectStandardOutput = true,
@@ -94,19 +117,14 @@ namespace OneNote2AnkiWinFormNET
             };
             var process = new Process
             {
-                //MessageBox.Show("Run Script here");
-                // New process & configuration
                 StartInfo = psi,
                 EnableRaisingEvents = true
             };
 
             process.Start();
-            //process.BeginErrorReadLine(); // Asynchronous methods
-            //process.BeginOutputReadLine();
             process.WaitForExit();
 
-            string args = textBox1.Text;
-            if (args.IndexOf("debug") >= 0) // Searchs for debug argument
+            if (checkBoxCLI.Checked)
             {
                 // Redirect output for debugging:
                 // https://www.mathworks.com/matlabcentral/answers/586706-how-to-redirect-standard-input-and-standard-output-using-net-system-diagnostics-process
@@ -116,14 +134,28 @@ namespace OneNote2AnkiWinFormNET
                 MessageBox.Show(stdout);
                 var stder = process.StandardError.ReadToEnd();
                 MessageBox.Show(stder);
-
             }
-
             MessageBox.Show("Python process finished");
         }
 
         public void genXml(bool runpy)
         {
+            // Boilerplate code for switching between dev and live mode
+            string python_path; // Declare variables but don't assign any values yet 
+            string script_path;
+            string xml_path;
+            if (checkBoxDebug.Checked)
+            {
+                python_path = PYTHON_DEV;
+                script_path = SCRIPT_DEV;
+                xml_path = XML_DEV;
+            }
+            else
+            {
+                python_path = PYTHON_LIVE;
+                script_path = SCRIPT_LIVE;
+                xml_path = XML_LIVE;
+            }
             // Tree parsing
             List<TreeNode> selected_nodes = new List<TreeNode>();
             findCheckedNodes(selected_nodes, treeView1.Nodes);
@@ -134,7 +166,7 @@ namespace OneNote2AnkiWinFormNET
                 ONENOTE_APP.GetPageContent($"{node.Name}", out page_xml_str, PageInfo.piBinaryData); //    piBinary to include binary type data
                 XmlDocument page_xml_doc = new XmlDocument();
                 page_xml_doc.LoadXml(page_xml_str);
-                page_xml_doc.Save(XML_PATH);
+                page_xml_doc.Save(xml_path);
                 if (runpy)
                 {
                     runPython();
@@ -145,9 +177,26 @@ namespace OneNote2AnkiWinFormNET
 
         }
 
-        private void checkPython()
+        private void checkFilePaths()
         {
-            if (File.Exists(PYTHON))
+            // Boilerplate code for switching between dev and live mode
+            string python_path; // Declare variables but don't assign any values yet 
+            string script_path;
+            string xml_path;
+            if (checkBoxDebug.Checked)
+            {
+                python_path = PYTHON_DEV;
+                script_path = SCRIPT_DEV;
+                xml_path = XML_DEV;
+            }
+            else
+            {
+                python_path = PYTHON_LIVE;
+                script_path = SCRIPT_LIVE;
+                xml_path = XML_LIVE;
+            }
+
+            if (File.Exists(python_path))
             {
                 MessageBox.Show("Required Python interpreter exists");
             }
@@ -155,12 +204,24 @@ namespace OneNote2AnkiWinFormNET
             {
                 MessageBox.Show("Required Python interpreter not found");
             }
+            if (File.Exists(script_path))
+            {
+                MessageBox.Show("Required Python script exists");
+            }
+            else
+            {
+                MessageBox.Show("Required Python script not found");
+            }
+            if (File.Exists(xml_path))
+            {
+                MessageBox.Show("XML already exists at xml_path");
+            }
+            else
+            {
+                MessageBox.Show("xml_path has no file");
+            }
         }
-        
-        private void installPython()
-        {
 
-        }
 
         // =============== Auto-generated functions ==========================
 
@@ -196,10 +257,15 @@ namespace OneNote2AnkiWinFormNET
 
         private void button4_Click(object sender, EventArgs e)
         {
-            checkPython();
+            checkFilePaths();
         }
 
         private void button5_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(ROOT_SLN);
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
 
         }
