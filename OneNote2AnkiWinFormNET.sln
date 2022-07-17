@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31515.178
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneNote2AnkiWinFormNET", "OneNote2AnkiWinFormNET.csproj", "{4D186305-7054-40CD-9EBF-24A9279EC7BB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormNET", "WinFormNET.csproj", "{4D186305-7054-40CD-9EBF-24A9279EC7BB}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "python_assets", "python_assets\python_assets.pyproj", "{74965F7D-58BD-43B8-8397-D545505251EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,8 @@ Global
 		{4D186305-7054-40CD-9EBF-24A9279EC7BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D186305-7054-40CD-9EBF-24A9279EC7BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D186305-7054-40CD-9EBF-24A9279EC7BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74965F7D-58BD-43B8-8397-D545505251EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74965F7D-58BD-43B8-8397-D545505251EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

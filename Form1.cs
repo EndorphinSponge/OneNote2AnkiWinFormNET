@@ -17,10 +17,12 @@ namespace OneNote2AnkiWinFormNET
     public partial class Form1 : Form
     {
         // Make global OneNote instance
-        Microsoft.Office.Interop.OneNote.Application onApplication = new Microsoft.Office.Interop.OneNote.Application();
-        public string XML_PATH = @"C:\Users\steve\OneDrive - ualberta.ca\Coding\OneNote2AnkiWinFormNET\python_assets\export.xml";
-        public string PYTHON = @"C:\Users\steve\.conda\envs\onenote2anki\python.exe";
-        public string SCRIPT = $@"C:\Users\steve\OneDrive - ualberta.ca\Coding\OneNote2AnkiWinFormNET\python_assets\main.py"; // -u Parameter to redirect stream
+        Microsoft.Office.Interop.OneNote.Application ONENOTE_APP = new Microsoft.Office.Interop.OneNote.Application();
+        public static string USER = Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile); // Needs to be static for other variables to use it
+
+        public string XML_PATH = $@"{USER}\OneDrive - ualberta.ca\Coding\OneNote2AnkiWinFormNET\python_assets\export.xml";
+        public string PYTHON = $@"{USER}\.conda\envs\onenote2anki\python.exe";
+        public string SCRIPT = $@"{USER}\OneDrive - ualberta.ca\Coding\OneNote2AnkiWinFormNET\python_assets\main.py";
 
 
         public Form1()
@@ -34,7 +36,7 @@ namespace OneNote2AnkiWinFormNET
 
             // Load XML hierarchy
             string hierarchy_str = "";
-            onApplication.GetHierarchy(null,
+            ONENOTE_APP.GetHierarchy(null,
                 Microsoft.Office.Interop.OneNote.HierarchyScope.hsPages, out hierarchy_str);
             XmlDocument hierarchy_xml_doc = new XmlDocument();
             hierarchy_xml_doc.LoadXml(hierarchy_str);
@@ -129,7 +131,7 @@ namespace OneNote2AnkiWinFormNET
             {
                 MessageBox.Show($"Found {node.Text}, {node.Name}");
                 string page_xml_str = ""; // Reset the string variable, unsure if necessary 
-                onApplication.GetPageContent($"{node.Name}", out page_xml_str, PageInfo.piBinaryData); //    piBinary to include binary type data
+                ONENOTE_APP.GetPageContent($"{node.Name}", out page_xml_str, PageInfo.piBinaryData); //    piBinary to include binary type data
                 XmlDocument page_xml_doc = new XmlDocument();
                 page_xml_doc.LoadXml(page_xml_str);
                 page_xml_doc.Save(XML_PATH);
@@ -143,7 +145,22 @@ namespace OneNote2AnkiWinFormNET
 
         }
 
+        private void checkPython()
+        {
+            if (File.Exists(PYTHON))
+            {
+                MessageBox.Show("Required Python interpreter exists");
+            }
+            else
+            {
+                MessageBox.Show("Required Python interpreter not found");
+            }
+        }
         
+        private void installPython()
+        {
+
+        }
 
         // =============== Auto-generated functions ==========================
 
@@ -177,6 +194,14 @@ namespace OneNote2AnkiWinFormNET
 
         }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            checkPython();
+        }
 
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
