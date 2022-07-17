@@ -117,15 +117,16 @@ namespace OneNote2AnkiWinFormNET
             {
                 arguments = arguments + "add ";
             }
+            bool redirect = checkBoxCLI.Checked;
 
             var psi = new ProcessStartInfo
             {
                 FileName = python_path,
                 Arguments = $"\"{script_path}\" {arguments}", // File name should not be enclosed in brackets since it is taken literally in the file name
-                UseShellExecute = false, // For some reason, this needs to be true in order for Python script to work, maybe b/c Python program relies on Shell
-                RedirectStandardInput = true,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
+                UseShellExecute = false, // Can set to true to mimic local CMD behaviour - https://stackoverflow.com/questions/5255086/when-do-we-need-to-set-processstartinfo-useshellexecute-to-true
+                RedirectStandardInput = redirect,
+                RedirectStandardOutput = redirect,
+                RedirectStandardError = redirect,
                 CreateNoWindow = false
             };
             var process = new Process
@@ -298,6 +299,11 @@ namespace OneNote2AnkiWinFormNET
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBoxCards_CheckedChanged(object sender, EventArgs e)
         {
 
         }
