@@ -3,6 +3,11 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# Custom
+install_dir/
+install_dir/**
+install_dir/**/*
+
 
 # User-specific files
 *.rsuser
@@ -363,10 +368,3 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-# Custom
-install_dir/
-install_dir/**
-install_dir/**/*
-python_assets/
-python_assets/**
-python_assets/**/*
