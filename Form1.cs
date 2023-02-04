@@ -22,14 +22,14 @@ namespace OneNote2AnkiWinFormNET
         public static string ROOT_SLN = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName; // Gets parent directory of bin\debug\ folder
         public static string ROOT_EXE = System.Windows.Forms.Application.StartupPath; // Gets directory that contains exe
 
-        public string XML_DEV = $@"{ROOT_SLN}\python_assets\page_xml.xml";
-        public string XMLOUTLINE_DEV = $@"{ROOT_SLN}\python_assets\outline_xml.xml";
+        public string XML_DEV = $@"{ROOT_SLN}\python_assets\data\page_xml.xml";
+        public string XMLOUTLINE_DEV = $@"{ROOT_SLN}\python_assets\data\outline_xml.xml";
         public string PYTHON_DEV = $@"{USER}\.conda\envs\onenote2anki\python.exe";
         public string SCRIPT_DEV = $@"{ROOT_SLN}\python_assets\main.py";
 
         // Note that CMD processes start with same directory as exe, hence don't need ROOT_EXE in these variables
-        public string XML_LIVE = $@"python_assets\page_xml.xml";
-        public string XMLOUTLINE_LIVE = $@"python_assets\outline_xml.xml";
+        public string XML_LIVE = $@"python_assets\data\page_xml.xml";
+        public string XMLOUTLINE_LIVE = $@"python_assets\data\outline_xml.xml";
         public string PYTHON_LIVE = $@"pyenv\python.exe";
         public string SCRIPT_LIVE = $@"python_assets\main.py";
 
