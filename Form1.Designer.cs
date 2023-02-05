@@ -31,16 +31,18 @@ namespace OneNote2AnkiWinFormNET
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.treeView1 = new System.Windows.Forms.TreeView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.checkBoxCLI = new System.Windows.Forms.CheckBox();
-            this.checkBoxDebug = new System.Windows.Forms.CheckBox();
-            this.checkBoxHtml = new System.Windows.Forms.CheckBox();
-            this.checkBoxCards = new System.Windows.Forms.CheckBox();
-            this.button6 = new System.Windows.Forms.Button();
+            this.ButtonProcess = new System.Windows.Forms.Button();
+            this.ButtonGenXml = new System.Windows.Forms.Button();
+            this.ButtonPython = new System.Windows.Forms.Button();
+            this.ButtonCheckPaths = new System.Windows.Forms.Button();
+            this.ButtonUpdOutline = new System.Windows.Forms.Button();
+            this.CheckBoxCLI = new System.Windows.Forms.CheckBox();
+            this.CheckBoxDebug = new System.Windows.Forms.CheckBox();
+            this.CheckBoxHtml = new System.Windows.Forms.CheckBox();
+            this.CheckBoxCards = new System.Windows.Forms.CheckBox();
+            this.ButtonMisc = new System.Windows.Forms.Button();
+            this.ButtonRemCards = new System.Windows.Forms.Button();
+            this.ButtonReport = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // treeView1
@@ -56,119 +58,141 @@ namespace OneNote2AnkiWinFormNET
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
-            // button1
+            // ButtonProcess
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(342, 10);
-            this.button1.Margin = new System.Windows.Forms.Padding(1);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(125, 45);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Process page(s)";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.processPage);
+            this.ButtonProcess.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonProcess.Location = new System.Drawing.Point(342, 10);
+            this.ButtonProcess.Margin = new System.Windows.Forms.Padding(1);
+            this.ButtonProcess.Name = "ButtonProcess";
+            this.ButtonProcess.Size = new System.Drawing.Size(125, 45);
+            this.ButtonProcess.TabIndex = 1;
+            this.ButtonProcess.Text = "Process page(s)";
+            this.ButtonProcess.UseVisualStyleBackColor = true;
+            this.ButtonProcess.Click += new System.EventHandler(this.ButtonProcess_Click);
             // 
-            // button2
+            // ButtonGenXml
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(342, 57);
-            this.button2.Margin = new System.Windows.Forms.Padding(1);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(125, 45);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Generate XML only";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.genXmlOnly);
+            this.ButtonGenXml.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonGenXml.Location = new System.Drawing.Point(342, 57);
+            this.ButtonGenXml.Margin = new System.Windows.Forms.Padding(1);
+            this.ButtonGenXml.Name = "ButtonGenXml";
+            this.ButtonGenXml.Size = new System.Drawing.Size(125, 45);
+            this.ButtonGenXml.TabIndex = 2;
+            this.ButtonGenXml.Text = "Generate XML only";
+            this.ButtonGenXml.UseVisualStyleBackColor = true;
+            this.ButtonGenXml.Click += new System.EventHandler(this.ButtonGenXml_Click);
             // 
-            // button3
+            // ButtonPython
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(342, 104);
-            this.button3.Margin = new System.Windows.Forms.Padding(1);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(125, 45);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "Run Python only";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.runPythonOnly);
+            this.ButtonPython.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonPython.Location = new System.Drawing.Point(342, 104);
+            this.ButtonPython.Margin = new System.Windows.Forms.Padding(1);
+            this.ButtonPython.Name = "ButtonPython";
+            this.ButtonPython.Size = new System.Drawing.Size(125, 45);
+            this.ButtonPython.TabIndex = 5;
+            this.ButtonPython.Text = "Run Python only";
+            this.ButtonPython.UseVisualStyleBackColor = true;
+            this.ButtonPython.Click += new System.EventHandler(this.ButtonPython_Click);
             // 
-            // button4
+            // ButtonCheckPaths
             // 
-            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.Location = new System.Drawing.Point(342, 405);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(125, 25);
-            this.button4.TabIndex = 6;
-            this.button4.Text = "Check Paths";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.buttonCheckPaths);
+            this.ButtonCheckPaths.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonCheckPaths.Location = new System.Drawing.Point(342, 374);
+            this.ButtonCheckPaths.Name = "ButtonCheckPaths";
+            this.ButtonCheckPaths.Size = new System.Drawing.Size(125, 25);
+            this.ButtonCheckPaths.TabIndex = 6;
+            this.ButtonCheckPaths.Text = "Check Paths";
+            this.ButtonCheckPaths.UseVisualStyleBackColor = true;
+            this.ButtonCheckPaths.Click += new System.EventHandler(this.ButtonCheckPaths_Click);
             // 
-            // button5
+            // ButtonUpdOutline
             // 
-            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.Location = new System.Drawing.Point(342, 436);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(125, 25);
-            this.button5.TabIndex = 7;
-            this.button5.Text = "Update Outline";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.buttonUpdateOutline);
+            this.ButtonUpdOutline.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonUpdOutline.Location = new System.Drawing.Point(342, 405);
+            this.ButtonUpdOutline.Name = "ButtonUpdOutline";
+            this.ButtonUpdOutline.Size = new System.Drawing.Size(125, 25);
+            this.ButtonUpdOutline.TabIndex = 7;
+            this.ButtonUpdOutline.Text = "Update Outline";
+            this.ButtonUpdOutline.UseVisualStyleBackColor = true;
+            this.ButtonUpdOutline.Click += new System.EventHandler(this.buttonUpdateOutline);
             // 
-            // checkBoxCLI
+            // CheckBoxCLI
             // 
-            this.checkBoxCLI.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBoxCLI.Location = new System.Drawing.Point(342, 498);
-            this.checkBoxCLI.Name = "checkBoxCLI";
-            this.checkBoxCLI.Size = new System.Drawing.Size(125, 20);
-            this.checkBoxCLI.TabIndex = 8;
-            this.checkBoxCLI.Text = "CLI Output";
-            this.checkBoxCLI.UseVisualStyleBackColor = true;
-            this.checkBoxCLI.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.CheckBoxCLI.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.CheckBoxCLI.Location = new System.Drawing.Point(342, 498);
+            this.CheckBoxCLI.Name = "CheckBoxCLI";
+            this.CheckBoxCLI.Size = new System.Drawing.Size(125, 20);
+            this.CheckBoxCLI.TabIndex = 8;
+            this.CheckBoxCLI.Text = "CLI Output";
+            this.CheckBoxCLI.UseVisualStyleBackColor = true;
+            this.CheckBoxCLI.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // checkBoxDebug
+            // CheckBoxDebug
             // 
-            this.checkBoxDebug.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBoxDebug.Location = new System.Drawing.Point(342, 524);
-            this.checkBoxDebug.Name = "checkBoxDebug";
-            this.checkBoxDebug.Size = new System.Drawing.Size(125, 20);
-            this.checkBoxDebug.TabIndex = 9;
-            this.checkBoxDebug.Text = "Debug mode";
-            this.checkBoxDebug.UseVisualStyleBackColor = true;
+            this.CheckBoxDebug.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.CheckBoxDebug.Location = new System.Drawing.Point(342, 524);
+            this.CheckBoxDebug.Name = "CheckBoxDebug";
+            this.CheckBoxDebug.Size = new System.Drawing.Size(125, 20);
+            this.CheckBoxDebug.TabIndex = 9;
+            this.CheckBoxDebug.Text = "Debug mode";
+            this.CheckBoxDebug.UseVisualStyleBackColor = true;
             // 
-            // checkBoxHtml
+            // CheckBoxHtml
             // 
-            this.checkBoxHtml.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBoxHtml.Location = new System.Drawing.Point(342, 158);
-            this.checkBoxHtml.Name = "checkBoxHtml";
-            this.checkBoxHtml.Size = new System.Drawing.Size(125, 20);
-            this.checkBoxHtml.TabIndex = 8;
-            this.checkBoxHtml.Text = "HTML Output";
-            this.checkBoxHtml.UseVisualStyleBackColor = true;
-            this.checkBoxHtml.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.CheckBoxHtml.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.CheckBoxHtml.Location = new System.Drawing.Point(342, 158);
+            this.CheckBoxHtml.Name = "CheckBoxHtml";
+            this.CheckBoxHtml.Size = new System.Drawing.Size(125, 20);
+            this.CheckBoxHtml.TabIndex = 8;
+            this.CheckBoxHtml.Text = "HTML Output";
+            this.CheckBoxHtml.UseVisualStyleBackColor = true;
+            this.CheckBoxHtml.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // checkBoxCards
+            // CheckBoxCards
             // 
-            this.checkBoxCards.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBoxCards.Checked = true;
-            this.checkBoxCards.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxCards.Location = new System.Drawing.Point(342, 184);
-            this.checkBoxCards.Name = "checkBoxCards";
-            this.checkBoxCards.Size = new System.Drawing.Size(125, 20);
-            this.checkBoxCards.TabIndex = 9;
-            this.checkBoxCards.Text = "Add Cards";
-            this.checkBoxCards.UseVisualStyleBackColor = true;
-            this.checkBoxCards.CheckedChanged += new System.EventHandler(this.checkBoxCards_CheckedChanged);
+            this.CheckBoxCards.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.CheckBoxCards.Checked = true;
+            this.CheckBoxCards.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CheckBoxCards.Location = new System.Drawing.Point(342, 184);
+            this.CheckBoxCards.Name = "CheckBoxCards";
+            this.CheckBoxCards.Size = new System.Drawing.Size(125, 20);
+            this.CheckBoxCards.TabIndex = 9;
+            this.CheckBoxCards.Text = "Add Cards";
+            this.CheckBoxCards.UseVisualStyleBackColor = true;
+            this.CheckBoxCards.CheckedChanged += new System.EventHandler(this.checkBoxCards_CheckedChanged);
             // 
-            // MISC BUTTON
+            // ButtonMisc
             // 
-            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button6.Location = new System.Drawing.Point(342, 467);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(125, 25);
-            this.button6.TabIndex = 7;
-            this.button6.Text = "Misc Button";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.buttonMisc);
+            this.ButtonMisc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonMisc.Location = new System.Drawing.Point(342, 467);
+            this.ButtonMisc.Name = "ButtonMisc";
+            this.ButtonMisc.Size = new System.Drawing.Size(125, 25);
+            this.ButtonMisc.TabIndex = 7;
+            this.ButtonMisc.Text = "Misc Button";
+            this.ButtonMisc.UseVisualStyleBackColor = true;
+            this.ButtonMisc.Click += new System.EventHandler(this.ButtonMisc_Click);
+            // 
+            // ButtonRemCards
+            // 
+            this.ButtonRemCards.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonRemCards.Location = new System.Drawing.Point(342, 436);
+            this.ButtonRemCards.Name = "ButtonRemCards";
+            this.ButtonRemCards.Size = new System.Drawing.Size(125, 25);
+            this.ButtonRemCards.TabIndex = 10;
+            this.ButtonRemCards.Text = "Rem Auto Cards";
+            this.ButtonRemCards.UseVisualStyleBackColor = true;
+            this.ButtonRemCards.Click += new System.EventHandler(this.ButtonRemCards_Click);
+            // 
+            // ButtonReport
+            // 
+            this.ButtonReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonReport.Location = new System.Drawing.Point(342, 343);
+            this.ButtonReport.Name = "ButtonReport";
+            this.ButtonReport.Size = new System.Drawing.Size(125, 25);
+            this.ButtonReport.TabIndex = 10;
+            this.ButtonReport.Text = "Report Cards";
+            this.ButtonReport.UseVisualStyleBackColor = true;
+            this.ButtonReport.Click += new System.EventHandler(this.ButtonReport_Click);
             // 
             // Form1
             // 
@@ -176,16 +200,18 @@ namespace OneNote2AnkiWinFormNET
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(477, 557);
-            this.Controls.Add(this.checkBoxCards);
-            this.Controls.Add(this.checkBoxDebug);
-            this.Controls.Add(this.checkBoxHtml);
-            this.Controls.Add(this.checkBoxCLI);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.ButtonReport);
+            this.Controls.Add(this.ButtonRemCards);
+            this.Controls.Add(this.CheckBoxCards);
+            this.Controls.Add(this.CheckBoxDebug);
+            this.Controls.Add(this.CheckBoxHtml);
+            this.Controls.Add(this.CheckBoxCLI);
+            this.Controls.Add(this.ButtonMisc);
+            this.Controls.Add(this.ButtonUpdOutline);
+            this.Controls.Add(this.ButtonCheckPaths);
+            this.Controls.Add(this.ButtonPython);
+            this.Controls.Add(this.ButtonGenXml);
+            this.Controls.Add(this.ButtonProcess);
             this.Controls.Add(this.treeView1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(1);
@@ -199,16 +225,18 @@ namespace OneNote2AnkiWinFormNET
         #endregion
 
         internal System.Windows.Forms.TreeView treeView1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.CheckBox checkBoxCLI;
-        private System.Windows.Forms.CheckBox checkBoxDebug;
-        private System.Windows.Forms.CheckBox checkBoxHtml;
-        private System.Windows.Forms.CheckBox checkBoxCards;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button ButtonProcess;
+        private System.Windows.Forms.Button ButtonGenXml;
+        private System.Windows.Forms.Button ButtonPython;
+        private System.Windows.Forms.Button ButtonCheckPaths;
+        private System.Windows.Forms.Button ButtonUpdOutline;
+        private System.Windows.Forms.CheckBox CheckBoxCLI;
+        private System.Windows.Forms.CheckBox CheckBoxDebug;
+        private System.Windows.Forms.CheckBox CheckBoxHtml;
+        private System.Windows.Forms.CheckBox CheckBoxCards;
+        private System.Windows.Forms.Button ButtonMisc;
+        private System.Windows.Forms.Button ButtonRemCards;
+        private System.Windows.Forms.Button ButtonReport;
     }
 }
 

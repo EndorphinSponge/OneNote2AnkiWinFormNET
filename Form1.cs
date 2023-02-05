@@ -26,13 +26,13 @@ namespace OneNote2AnkiWinFormNET
         public string XML_DEV = $@"{ROOT_SLN}\python_assets\data\page_xml.xml";
         public string XMLOUTLINE_DEV = $@"{ROOT_SLN}\python_assets\data\outline_xml.xml";
         public string PYTHON_DEV = $@"{USER}\.conda\envs\onenote2anki\python.exe";
-        public string SCRIPT_DEV = $@"{ROOT_SLN}\python_assets\main.py";
+        public string SCRIPT_DEV = $@"{ROOT_SLN}\python_assets\";
 
         // Note that CMD processes start with same directory as exe, hence don't need ROOT_EXE in these variables
         public string XML_LIVE = $@"python_assets\data\page_xml.xml";
         public string XMLOUTLINE_LIVE = $@"python_assets\data\outline_xml.xml";
         public string PYTHON_LIVE = $@"pyenv\python.exe";
-        public string SCRIPT_LIVE = $@"python_assets\main.py";
+        public string SCRIPT_LIVE = $@"python_assets\";
 
 
         public Form1()
@@ -96,29 +96,29 @@ namespace OneNote2AnkiWinFormNET
             string python_path; // Declare variables but don't assign any values yet 
             string script_path;
             string xml_path;
-            if (checkBoxDebug.Checked)
+            if (CheckBoxDebug.Checked)
             { 
                 python_path = PYTHON_DEV;
-                script_path = SCRIPT_DEV;
+                script_path = SCRIPT_DEV + "main.py";
                 xml_path = XML_DEV;
             }
             else
             {
                 python_path = PYTHON_LIVE;
-                script_path = SCRIPT_LIVE;
+                script_path = SCRIPT_LIVE + "main.py";
                 xml_path = XML_LIVE;
             }
 
             string arguments = "";
-            if (checkBoxHtml.Checked)
+            if (CheckBoxHtml.Checked)
             {
                 arguments = arguments + "html ";
             }
-            if (checkBoxCards.Checked)
+            if (CheckBoxCards.Checked)
             {
                 arguments = arguments + "add ";
             }
-            bool redirect = checkBoxCLI.Checked;
+            bool redirect = CheckBoxCLI.Checked;
 
             var psi = new ProcessStartInfo
             {
@@ -139,7 +139,7 @@ namespace OneNote2AnkiWinFormNET
             process.Start();
             process.WaitForExit();
 
-            if (checkBoxCLI.Checked)
+            if (CheckBoxCLI.Checked)
             {
                 // Redirect output for debugging:
                 // https://www.mathworks.com/matlabcentral/answers/586706-how-to-redirect-standard-input-and-standard-output-using-net-system-diagnostics-process
@@ -159,16 +159,16 @@ namespace OneNote2AnkiWinFormNET
             string python_path; // Declare variables but don't assign any values yet 
             string script_path;
             string xml_path;
-            if (checkBoxDebug.Checked)
+            if (CheckBoxDebug.Checked)
             {
                 python_path = PYTHON_DEV;
-                script_path = SCRIPT_DEV;
+                script_path = SCRIPT_DEV + "main.py";
                 xml_path = XML_DEV;
             }
             else
             {
                 python_path = PYTHON_LIVE;
-                script_path = SCRIPT_LIVE;
+                script_path = SCRIPT_LIVE + "main.py";
                 xml_path = XML_LIVE;
             }
 
@@ -228,16 +228,16 @@ namespace OneNote2AnkiWinFormNET
             string python_path; // Declare variables but don't assign any values yet 
             string script_path;
             string xml_path;
-            if (checkBoxDebug.Checked)
+            if (CheckBoxDebug.Checked)
             {
                 python_path = PYTHON_DEV;
-                script_path = SCRIPT_DEV;
+                script_path = SCRIPT_DEV + "main.py";
                 xml_path = XML_DEV;
             }
             else
             {
                 python_path = PYTHON_LIVE;
-                script_path = SCRIPT_LIVE;
+                script_path = SCRIPT_LIVE + "main.py";
                 xml_path = XML_LIVE;
             }
 
@@ -271,7 +271,7 @@ namespace OneNote2AnkiWinFormNET
         {
             // Boilerplate code for switching between dev and live mode
             string xmloutline_path;
-            if (checkBoxDebug.Checked)
+            if (CheckBoxDebug.Checked)
             {
                 xmloutline_path = XMLOUTLINE_DEV;
             }
@@ -289,17 +289,17 @@ namespace OneNote2AnkiWinFormNET
         }
         // =============== Auto-generated functions ==========================
 
-        private void processPage(object sender, EventArgs e)
+        private void ButtonProcess_Click(object sender, EventArgs e)
         {
             genXml(runpy: true);
         }
 
-        private void genXmlOnly(object sender, EventArgs e)
+        private void ButtonGenXml_Click(object sender, EventArgs e)
         {
             genXml(runpy: false);
         }
 
-        private void runPythonOnly(object sender, EventArgs e)
+        private void ButtonPython_Click(object sender, EventArgs e)
         {
             runPython();
         }
@@ -319,7 +319,7 @@ namespace OneNote2AnkiWinFormNET
 
         }
 
-        private void buttonCheckPaths(object sender, EventArgs e)
+        private void ButtonCheckPaths_Click(object sender, EventArgs e)
         {
             checkFilePaths();
         }
@@ -329,7 +329,7 @@ namespace OneNote2AnkiWinFormNET
             updateOutline();
         }
 
-        private void buttonMisc(object sender, EventArgs e)
+        private void ButtonMisc_Click(object sender, EventArgs e)
         {
             
 
@@ -346,5 +346,101 @@ namespace OneNote2AnkiWinFormNET
         {
 
         }
+
+        private void ButtonReport_Click(object sender, EventArgs e)
+        {
+            string python_path; // Declare variables but don't assign any values yet 
+            string script_path;
+            string xml_path;
+            if (CheckBoxDebug.Checked)
+            {
+                python_path = PYTHON_DEV;
+                script_path = SCRIPT_DEV + "anki_api.py";
+                xml_path = XML_DEV;
+            }
+            else
+            {
+                python_path = PYTHON_LIVE;
+                script_path = SCRIPT_LIVE + "anki_api.py";
+                xml_path = XML_LIVE;
+            }
+
+            string arguments = "report";
+
+            var psi = new ProcessStartInfo
+            {
+                FileName = python_path,
+                Arguments = $"\"{script_path}\" {arguments}", // File name should not be enclosed in brackets since it is taken literally in the file name
+                UseShellExecute = false, // Can set to true to mimic local CMD behaviour - https://stackoverflow.com/questions/5255086/when-do-we-need-to-set-processstartinfo-useshellexecute-to-true
+                RedirectStandardInput = true,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                CreateNoWindow = false
+            };
+            var process = new Process
+            {
+                StartInfo = psi,
+                EnableRaisingEvents = true
+            };
+
+            process.Start();
+            process.WaitForExit();
+
+            var stdout = process.StandardOutput.ReadToEnd();
+            MessageBox.Show(stdout);
+        }
+
+        private void ButtonRemCards_Click(object sender, EventArgs e)
+        {
+            string python_path; // Declare variables but don't assign any values yet 
+            string script_path;
+            string xml_path;
+            if (CheckBoxDebug.Checked)
+            {
+                python_path = PYTHON_DEV;
+                script_path = SCRIPT_DEV + "anki_api.py";
+                xml_path = XML_DEV;
+            }
+            else
+            {
+                python_path = PYTHON_LIVE;
+                script_path = SCRIPT_LIVE + "anki_api.py";
+                xml_path = XML_LIVE;
+            }
+
+            DialogResult dialog_result = MessageBox.Show("Removing all auto-generated cards", "Are you sure?", MessageBoxButtons.YesNo);
+            if (dialog_result == DialogResult.Yes)
+            {
+                string arguments = "remove";
+
+                var psi = new ProcessStartInfo
+                {
+                    FileName = python_path,
+                    Arguments = $"\"{script_path}\" {arguments}", // File name should not be enclosed in brackets since it is taken literally in the file name
+                    UseShellExecute = false, // Can set to true to mimic local CMD behaviour - https://stackoverflow.com/questions/5255086/when-do-we-need-to-set-processstartinfo-useshellexecute-to-true
+                    RedirectStandardInput = true,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    CreateNoWindow = false
+                };
+                var process = new Process
+                {
+                    StartInfo = psi,
+                    EnableRaisingEvents = true
+                };
+
+                process.Start();
+                process.WaitForExit();
+
+                var stdout = process.StandardOutput.ReadToEnd();
+                MessageBox.Show(stdout);
+            }
+            else if (dialog_result == DialogResult.No)
+            {
+                
+            }
+        }
+
+        
     }
 }
