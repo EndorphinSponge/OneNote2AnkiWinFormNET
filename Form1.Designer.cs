@@ -43,6 +43,7 @@ namespace OneNote2AnkiWinFormNET
             this.ButtonMisc = new System.Windows.Forms.Button();
             this.ButtonRemCards = new System.Windows.Forms.Button();
             this.ButtonReport = new System.Windows.Forms.Button();
+            this.CheckBoxNoDialogues = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // treeView1
@@ -194,6 +195,17 @@ namespace OneNote2AnkiWinFormNET
             this.ButtonReport.UseVisualStyleBackColor = true;
             this.ButtonReport.Click += new System.EventHandler(this.ButtonReport_Click);
             // 
+            // CheckBoxNoDialogues
+            // 
+            this.CheckBoxNoDialogues.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.CheckBoxNoDialogues.Location = new System.Drawing.Point(342, 210);
+            this.CheckBoxNoDialogues.Name = "CheckBoxNoDialogues";
+            this.CheckBoxNoDialogues.Size = new System.Drawing.Size(125, 20);
+            this.CheckBoxNoDialogues.TabIndex = 9;
+            this.CheckBoxNoDialogues.Text = "Batch";
+            this.CheckBoxNoDialogues.UseVisualStyleBackColor = true;
+            this.CheckBoxNoDialogues.CheckedChanged += new System.EventHandler(this.checkBoxCards_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -202,6 +214,7 @@ namespace OneNote2AnkiWinFormNET
             this.ClientSize = new System.Drawing.Size(477, 557);
             this.Controls.Add(this.ButtonReport);
             this.Controls.Add(this.ButtonRemCards);
+            this.Controls.Add(this.CheckBoxNoDialogues);
             this.Controls.Add(this.CheckBoxCards);
             this.Controls.Add(this.CheckBoxDebug);
             this.Controls.Add(this.CheckBoxHtml);
@@ -237,6 +250,7 @@ namespace OneNote2AnkiWinFormNET
         private System.Windows.Forms.Button ButtonMisc;
         private System.Windows.Forms.Button ButtonRemCards;
         private System.Windows.Forms.Button ButtonReport;
+        private System.Windows.Forms.CheckBox CheckBoxNoDialogues;
     }
 }
 

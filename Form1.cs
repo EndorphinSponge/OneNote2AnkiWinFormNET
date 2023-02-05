@@ -150,7 +150,11 @@ namespace OneNote2AnkiWinFormNET
                 var stder = process.StandardError.ReadToEnd();
                 MessageBox.Show(stder);
             }
-            MessageBox.Show("Python process finished");
+
+            if (!CheckBoxNoDialogues.Checked)
+            {
+                MessageBox.Show("Python process finished");
+            }
         }
 
         public void genXml(bool runpy)
@@ -183,7 +187,13 @@ namespace OneNote2AnkiWinFormNET
             {
                 string page_title = node.Text; // Page/section name is stored in node.Text while ID is stored as node.Name
                 string page_id = node.Name;
-                MessageBox.Show($"Found {page_title}, ID: {page_id}");
+
+                if (!CheckBoxNoDialogues.Checked)
+                {
+                    MessageBox.Show($"Found {page_title}, ID: {page_id}");
+                }
+
+
                 string page_xml_str = ""; // Reset the string variable, unsure if necessary 
 
                 ONENOTE_APP.GetPageContent($"{node.Name}", out page_xml_str, PageInfo.piBinaryData); // piBinary to include binary type data
@@ -384,10 +394,13 @@ namespace OneNote2AnkiWinFormNET
             };
 
             process.Start();
+            
             process.WaitForExit();
 
             var stdout = process.StandardOutput.ReadToEnd();
             MessageBox.Show(stdout);
+            var stder = process.StandardError.ReadToEnd();
+            MessageBox.Show(stder);
         }
 
         private void ButtonRemCards_Click(object sender, EventArgs e)
@@ -434,6 +447,8 @@ namespace OneNote2AnkiWinFormNET
 
                 var stdout = process.StandardOutput.ReadToEnd();
                 MessageBox.Show(stdout);
+                var stder = process.StandardError.ReadToEnd();
+                MessageBox.Show(stder);
             }
             else if (dialog_result == DialogResult.No)
             {
