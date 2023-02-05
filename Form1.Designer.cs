@@ -159,7 +159,7 @@ namespace OneNote2AnkiWinFormNET
             this.checkBoxCards.UseVisualStyleBackColor = true;
             this.checkBoxCards.CheckedChanged += new System.EventHandler(this.checkBoxCards_CheckedChanged);
             // 
-            // button6
+            // MISC BUTTON
             // 
             this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button6.Location = new System.Drawing.Point(342, 467);
@@ -168,7 +168,7 @@ namespace OneNote2AnkiWinFormNET
             this.button6.TabIndex = 7;
             this.button6.Text = "Misc Button";
             this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.buttonUpdateOutline);
+            this.button6.Click += new System.EventHandler(this.buttonMisc);
             // 
             // Form1
             // 

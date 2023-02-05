@@ -11,6 +11,7 @@ using System.Xml;
 using System.IO;
 using System.Diagnostics;
 using Microsoft.Office.Interop.OneNote;
+using System.Runtime.InteropServices; // Imports Marshal interop class
 
 namespace OneNote2AnkiWinFormNET
 {
@@ -65,9 +66,9 @@ namespace OneNote2AnkiWinFormNET
                 // Make the new TreeView node.
                 if (child_node.Attributes["ID"] != null && child_node.Attributes["name"] != null) 
                 {
-                    TreeNode new_node = parent_nodes.Add(child_node.Attributes["ID"].Value, child_node.Attributes["name"].Value);
-                    // Recursively make this node's descendants.
-                    addTreeViewChildNodes(new_node.Nodes, child_node);
+                    TreeNode new_node = parent_nodes.Add(child_node.Attributes["ID"].Value, child_node.Attributes["name"].Value); // Uses the ID as node "name" and the node's name (e.g., title) as the text
+                    
+                    addTreeViewChildNodes(new_node.Nodes, child_node); // Recursively make this node's descendants.
 
                     // If this is a leaf node, make sure it's visible.
                     //if (new_node.Nodes.Count == 0) new_node.EnsureVisible();
@@ -170,24 +171,54 @@ namespace OneNote2AnkiWinFormNET
                 script_path = SCRIPT_LIVE;
                 xml_path = XML_LIVE;
             }
+
             // Tree parsing
+            var ns_manager = new XmlNamespaceManager(new NameTable()); // Allows namespace search later
+            ns_manager.AddNamespace("one", "http://schemas.microsoft.com/office/onenote/2013/onenote");
+
             List<TreeNode> selected_nodes = new List<TreeNode>();
             findCheckedNodes(selected_nodes, treeView1.Nodes);
+
             foreach (TreeNode node in selected_nodes)
             {
-                MessageBox.Show($"Found {node.Text}, {node.Name}");
+                string page_title = node.Text; // Page/section name is stored in node.Text while ID is stored as node.Name
+                string page_id = node.Name;
+                MessageBox.Show($"Found {page_title}, ID: {page_id}");
                 string page_xml_str = ""; // Reset the string variable, unsure if necessary 
-                ONENOTE_APP.GetPageContent($"{node.Name}", out page_xml_str, PageInfo.piBinaryData); //    piBinary to include binary type data
+
+                ONENOTE_APP.GetPageContent($"{node.Name}", out page_xml_str, PageInfo.piBinaryData); // piBinary to include binary type data
                 XmlDocument page_xml_doc = new XmlDocument();
                 page_xml_doc.LoadXml(page_xml_str);
+
+
+                XmlElement root_node = page_xml_doc.DocumentElement;
+                // XmlNodeList nodes_filtered = root_node.SelectNodes("//*[@objectID]", ns_manager); // Modify every node that has an object ID - too slow
+                XmlNodeList nodes_filtered = root_node.SelectNodes("//one:Outline/one:OEChildren/one:OE", ns_manager); // ns_manager allows namespace 
+
+
+                foreach (XmlNode oenode in nodes_filtered)
+                {
+                    string node_id = oenode.Attributes["objectID"].Value;
+                    string object_link = "";
+                    ONENOTE_APP.GetHyperlinkToObject(bstrHierarchyID: page_id,
+                        bstrPageContentObjectID: node_id,
+                        out object_link); // Note that bstrHierarchyID needs to be a page if you're passing in an ObjectID
+
+                    XmlAttribute attr = page_xml_doc.CreateAttribute("objectLink"); //Create a new attribute
+                    attr.Value = object_link;
+
+                    oenode.Attributes.SetNamedItem(attr); //Add the attribute to the node 
+
+                }
+
                 page_xml_doc.Save(xml_path);
+
                 if (runpy)
                 {
                     runPython();
                 }
-            }
 
-            //XmlNodeList xn_list = hierarchy_xml_doc.SelectNodes($"//*[@name='{}']");
+            }
 
         }
 
@@ -297,6 +328,14 @@ namespace OneNote2AnkiWinFormNET
         {
             updateOutline();
         }
+
+        private void buttonMisc(object sender, EventArgs e)
+        {
+            
+
+
+        }
+
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
