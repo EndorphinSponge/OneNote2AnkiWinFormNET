@@ -44,6 +44,7 @@ namespace OneNote2AnkiWinFormNET
             this.ButtonRemCards = new System.Windows.Forms.Button();
             this.ButtonReport = new System.Windows.Forms.Button();
             this.CheckBoxNoDialogues = new System.Windows.Forms.CheckBox();
+            this.CheckBoxReplace = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // treeView1
@@ -198,13 +199,26 @@ namespace OneNote2AnkiWinFormNET
             // CheckBoxNoDialogues
             // 
             this.CheckBoxNoDialogues.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.CheckBoxNoDialogues.Location = new System.Drawing.Point(342, 210);
+            this.CheckBoxNoDialogues.Location = new System.Drawing.Point(342, 236);
             this.CheckBoxNoDialogues.Name = "CheckBoxNoDialogues";
             this.CheckBoxNoDialogues.Size = new System.Drawing.Size(125, 20);
             this.CheckBoxNoDialogues.TabIndex = 9;
             this.CheckBoxNoDialogues.Text = "Batch";
             this.CheckBoxNoDialogues.UseVisualStyleBackColor = true;
             this.CheckBoxNoDialogues.CheckedChanged += new System.EventHandler(this.checkBoxCards_CheckedChanged);
+            // 
+            // CheckBoxReplace
+            // 
+            this.CheckBoxReplace.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.CheckBoxReplace.Checked = true;
+            this.CheckBoxReplace.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CheckBoxReplace.Location = new System.Drawing.Point(342, 210);
+            this.CheckBoxReplace.Name = "CheckBoxReplace";
+            this.CheckBoxReplace.Size = new System.Drawing.Size(125, 20);
+            this.CheckBoxReplace.TabIndex = 9;
+            this.CheckBoxReplace.Text = "Replace";
+            this.CheckBoxReplace.UseVisualStyleBackColor = true;
+            this.CheckBoxReplace.CheckedChanged += new System.EventHandler(this.checkBoxCards_CheckedChanged);
             // 
             // Form1
             // 
@@ -214,6 +228,7 @@ namespace OneNote2AnkiWinFormNET
             this.ClientSize = new System.Drawing.Size(477, 557);
             this.Controls.Add(this.ButtonReport);
             this.Controls.Add(this.ButtonRemCards);
+            this.Controls.Add(this.CheckBoxReplace);
             this.Controls.Add(this.CheckBoxNoDialogues);
             this.Controls.Add(this.CheckBoxCards);
             this.Controls.Add(this.CheckBoxDebug);
@@ -251,6 +266,7 @@ namespace OneNote2AnkiWinFormNET
         private System.Windows.Forms.Button ButtonRemCards;
         private System.Windows.Forms.Button ButtonReport;
         private System.Windows.Forms.CheckBox CheckBoxNoDialogues;
+        private System.Windows.Forms.CheckBox CheckBoxReplace;
     }
 }
 

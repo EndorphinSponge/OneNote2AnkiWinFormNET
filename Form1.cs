@@ -118,6 +118,10 @@ namespace OneNote2AnkiWinFormNET
             {
                 arguments = arguments + "add ";
             }
+            if (CheckBoxReplace.Checked)
+            {
+                arguments = arguments + "replace ";
+            }
             bool redirect = CheckBoxCLI.Checked;
 
             var psi = new ProcessStartInfo
