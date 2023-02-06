@@ -45,6 +45,8 @@ namespace OneNote2AnkiWinFormNET
             this.ButtonReport = new System.Windows.Forms.Button();
             this.CheckBoxNoDialogues = new System.Windows.Forms.CheckBox();
             this.CheckBoxReplace = new System.Windows.Forms.CheckBox();
+            this.ButtonRefreshTree = new System.Windows.Forms.Button();
+            this.ButtonTickMarked = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // treeView1
@@ -56,7 +58,7 @@ namespace OneNote2AnkiWinFormNET
             this.treeView1.Location = new System.Drawing.Point(10, 10);
             this.treeView1.Margin = new System.Windows.Forms.Padding(1);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(319, 535);
+            this.treeView1.Size = new System.Drawing.Size(319, 641);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
@@ -99,7 +101,7 @@ namespace OneNote2AnkiWinFormNET
             // ButtonCheckPaths
             // 
             this.ButtonCheckPaths.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ButtonCheckPaths.Location = new System.Drawing.Point(342, 374);
+            this.ButtonCheckPaths.Location = new System.Drawing.Point(342, 511);
             this.ButtonCheckPaths.Name = "ButtonCheckPaths";
             this.ButtonCheckPaths.Size = new System.Drawing.Size(125, 25);
             this.ButtonCheckPaths.TabIndex = 6;
@@ -110,7 +112,7 @@ namespace OneNote2AnkiWinFormNET
             // ButtonUpdOutline
             // 
             this.ButtonUpdOutline.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ButtonUpdOutline.Location = new System.Drawing.Point(342, 405);
+            this.ButtonUpdOutline.Location = new System.Drawing.Point(342, 262);
             this.ButtonUpdOutline.Name = "ButtonUpdOutline";
             this.ButtonUpdOutline.Size = new System.Drawing.Size(125, 25);
             this.ButtonUpdOutline.TabIndex = 7;
@@ -121,7 +123,7 @@ namespace OneNote2AnkiWinFormNET
             // CheckBoxCLI
             // 
             this.CheckBoxCLI.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.CheckBoxCLI.Location = new System.Drawing.Point(342, 498);
+            this.CheckBoxCLI.Location = new System.Drawing.Point(342, 604);
             this.CheckBoxCLI.Name = "CheckBoxCLI";
             this.CheckBoxCLI.Size = new System.Drawing.Size(125, 20);
             this.CheckBoxCLI.TabIndex = 8;
@@ -132,7 +134,7 @@ namespace OneNote2AnkiWinFormNET
             // CheckBoxDebug
             // 
             this.CheckBoxDebug.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.CheckBoxDebug.Location = new System.Drawing.Point(342, 524);
+            this.CheckBoxDebug.Location = new System.Drawing.Point(342, 630);
             this.CheckBoxDebug.Name = "CheckBoxDebug";
             this.CheckBoxDebug.Size = new System.Drawing.Size(125, 20);
             this.CheckBoxDebug.TabIndex = 9;
@@ -166,7 +168,7 @@ namespace OneNote2AnkiWinFormNET
             // ButtonMisc
             // 
             this.ButtonMisc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ButtonMisc.Location = new System.Drawing.Point(342, 467);
+            this.ButtonMisc.Location = new System.Drawing.Point(342, 573);
             this.ButtonMisc.Name = "ButtonMisc";
             this.ButtonMisc.Size = new System.Drawing.Size(125, 25);
             this.ButtonMisc.TabIndex = 7;
@@ -177,7 +179,7 @@ namespace OneNote2AnkiWinFormNET
             // ButtonRemCards
             // 
             this.ButtonRemCards.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ButtonRemCards.Location = new System.Drawing.Point(342, 436);
+            this.ButtonRemCards.Location = new System.Drawing.Point(342, 542);
             this.ButtonRemCards.Name = "ButtonRemCards";
             this.ButtonRemCards.Size = new System.Drawing.Size(125, 25);
             this.ButtonRemCards.TabIndex = 10;
@@ -188,7 +190,7 @@ namespace OneNote2AnkiWinFormNET
             // ButtonReport
             // 
             this.ButtonReport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ButtonReport.Location = new System.Drawing.Point(342, 343);
+            this.ButtonReport.Location = new System.Drawing.Point(342, 480);
             this.ButtonReport.Name = "ButtonReport";
             this.ButtonReport.Size = new System.Drawing.Size(125, 25);
             this.ButtonReport.TabIndex = 10;
@@ -220,12 +222,34 @@ namespace OneNote2AnkiWinFormNET
             this.CheckBoxReplace.UseVisualStyleBackColor = true;
             this.CheckBoxReplace.CheckedChanged += new System.EventHandler(this.checkBoxCards_CheckedChanged);
             // 
+            // ButtonRefreshTree
+            // 
+            this.ButtonRefreshTree.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonRefreshTree.Location = new System.Drawing.Point(342, 293);
+            this.ButtonRefreshTree.Name = "ButtonRefreshTree";
+            this.ButtonRefreshTree.Size = new System.Drawing.Size(125, 25);
+            this.ButtonRefreshTree.TabIndex = 7;
+            this.ButtonRefreshTree.Text = "Refresh Tree";
+            this.ButtonRefreshTree.UseVisualStyleBackColor = true;
+            this.ButtonRefreshTree.Click += new System.EventHandler(this.ButtonRefreshTree_Click);
+            // 
+            // ButtonTickMarked
+            // 
+            this.ButtonTickMarked.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonTickMarked.Location = new System.Drawing.Point(342, 324);
+            this.ButtonTickMarked.Name = "ButtonTickMarked";
+            this.ButtonTickMarked.Size = new System.Drawing.Size(125, 25);
+            this.ButtonTickMarked.TabIndex = 7;
+            this.ButtonTickMarked.Text = "Tick Marked";
+            this.ButtonTickMarked.UseVisualStyleBackColor = true;
+            this.ButtonTickMarked.Click += new System.EventHandler(this.ButtonTickMarked_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(477, 557);
+            this.ClientSize = new System.Drawing.Size(477, 663);
             this.Controls.Add(this.ButtonReport);
             this.Controls.Add(this.ButtonRemCards);
             this.Controls.Add(this.CheckBoxReplace);
@@ -235,6 +259,8 @@ namespace OneNote2AnkiWinFormNET
             this.Controls.Add(this.CheckBoxHtml);
             this.Controls.Add(this.CheckBoxCLI);
             this.Controls.Add(this.ButtonMisc);
+            this.Controls.Add(this.ButtonTickMarked);
+            this.Controls.Add(this.ButtonRefreshTree);
             this.Controls.Add(this.ButtonUpdOutline);
             this.Controls.Add(this.ButtonCheckPaths);
             this.Controls.Add(this.ButtonPython);
@@ -267,6 +293,8 @@ namespace OneNote2AnkiWinFormNET
         private System.Windows.Forms.Button ButtonReport;
         private System.Windows.Forms.CheckBox CheckBoxNoDialogues;
         private System.Windows.Forms.CheckBox CheckBoxReplace;
+        private System.Windows.Forms.Button ButtonRefreshTree;
+        private System.Windows.Forms.Button ButtonTickMarked;
     }
 }
 

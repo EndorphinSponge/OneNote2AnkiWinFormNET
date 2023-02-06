@@ -90,6 +90,19 @@ namespace OneNote2AnkiWinFormNET
             }
         }
 
+        public void checkTreeNodesByName(string substring, TreeNodeCollection nodes)
+        {
+            foreach (TreeNode node in nodes)
+            {
+                if (node.Text.Contains(substring))
+                {
+                    node.Checked = true;
+                }
+                checkTreeNodesByName(substring, node.Nodes);
+            }
+        }
+
+
         public void runPython()
         {
             // Boilerplate code for switching between dev and live mode
@@ -343,12 +356,7 @@ namespace OneNote2AnkiWinFormNET
             updateOutline();
         }
 
-        private void ButtonMisc_Click(object sender, EventArgs e)
-        {
-            
 
-
-        }
 
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -460,6 +468,34 @@ namespace OneNote2AnkiWinFormNET
             }
         }
 
-        
+        private void ButtonRefreshTree_Click(object sender, EventArgs e)
+        {
+            // Load XML hierarchy
+            string hierarchy_str = "";
+            ONENOTE_APP.GetHierarchy(null,
+                Microsoft.Office.Interop.OneNote.HierarchyScope.hsPages, out hierarchy_str);
+            XmlDocument hierarchy_xml_doc = new XmlDocument();
+            hierarchy_xml_doc.LoadXml(hierarchy_str);
+
+
+            // Add the root node's children to the TreeView.
+            treeView1.Nodes.Clear();
+            addTreeViewChildNodes(treeView1.Nodes, hierarchy_xml_doc.DocumentElement);
+
+
+        }
+
+
+        private void ButtonTickMarked_Click(object sender, EventArgs e)
+        {
+            checkTreeNodesByName("[*]", treeView1.Nodes);
+
+        }
+
+        private void ButtonMisc_Click(object sender, EventArgs e)
+        {
+            
+
+        }
     }
 }
