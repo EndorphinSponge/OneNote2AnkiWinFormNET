@@ -314,6 +314,21 @@ namespace OneNote2AnkiWinFormNET
             hierarchy_xml_doc.Save(xmloutline_path);
             MessageBox.Show("Updated Outline XML");
         }
+
+        private void showTicked()
+        {
+            List<TreeNode> selected_nodes = new List<TreeNode>();
+            findCheckedNodes(selected_nodes, treeView1.Nodes);
+            string ticked = "Checked pages:";
+
+            foreach (TreeNode node in selected_nodes)
+            {
+                ticked = ticked + "\n" + node.Text;
+                
+            }
+
+            MessageBox.Show(ticked);
+        }
         // =============== Auto-generated functions ==========================
 
         private void ButtonProcess_Click(object sender, EventArgs e)
@@ -489,6 +504,18 @@ namespace OneNote2AnkiWinFormNET
         private void ButtonTickMarked_Click(object sender, EventArgs e)
         {
             checkTreeNodesByName("[*]", treeView1.Nodes);
+
+        }
+
+        private void ButtonTickMarked_Click2(object sender, EventArgs e)
+        {
+            checkTreeNodesByName(TextboxFilter.Text, treeView1.Nodes);
+
+        }
+
+        private void ButtonShowTicked_Click(object sender, EventArgs e)
+        {
+            showTicked();
 
         }
 

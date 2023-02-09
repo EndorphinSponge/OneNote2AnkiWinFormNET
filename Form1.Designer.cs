@@ -47,6 +47,9 @@ namespace OneNote2AnkiWinFormNET
             this.CheckBoxReplace = new System.Windows.Forms.CheckBox();
             this.ButtonRefreshTree = new System.Windows.Forms.Button();
             this.ButtonTickMarked = new System.Windows.Forms.Button();
+            this.ButtonTickMarked2 = new System.Windows.Forms.Button();
+            this.ButtonShowTicked = new System.Windows.Forms.Button();
+            this.TextboxFilter = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // treeView1
@@ -240,9 +243,40 @@ namespace OneNote2AnkiWinFormNET
             this.ButtonTickMarked.Name = "ButtonTickMarked";
             this.ButtonTickMarked.Size = new System.Drawing.Size(125, 25);
             this.ButtonTickMarked.TabIndex = 7;
-            this.ButtonTickMarked.Text = "Tick Marked";
+            this.ButtonTickMarked.Text = "Tick Marked [*]";
             this.ButtonTickMarked.UseVisualStyleBackColor = true;
             this.ButtonTickMarked.Click += new System.EventHandler(this.ButtonTickMarked_Click);
+            // 
+            // ButtonTickMarked2
+            // 
+            this.ButtonTickMarked2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonTickMarked2.Location = new System.Drawing.Point(342, 355);
+            this.ButtonTickMarked2.Name = "ButtonTickMarked2";
+            this.ButtonTickMarked2.Size = new System.Drawing.Size(68, 25);
+            this.ButtonTickMarked2.TabIndex = 7;
+            this.ButtonTickMarked2.Text = "Tick:";
+            this.ButtonTickMarked2.UseVisualStyleBackColor = true;
+            this.ButtonTickMarked2.Click += new System.EventHandler(this.ButtonTickMarked_Click2);
+            // 
+            // ButtonShowTicked
+            // 
+            this.ButtonShowTicked.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonShowTicked.Location = new System.Drawing.Point(342, 386);
+            this.ButtonShowTicked.Name = "ButtonShowTicked";
+            this.ButtonShowTicked.Size = new System.Drawing.Size(125, 25);
+            this.ButtonShowTicked.TabIndex = 7;
+            this.ButtonShowTicked.Text = "Show Ticked";
+            this.ButtonShowTicked.UseVisualStyleBackColor = true;
+            this.ButtonShowTicked.Click += new System.EventHandler(this.ButtonShowTicked_Click);
+            // 
+            // TextboxFilter
+            // 
+            this.TextboxFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F);
+            this.TextboxFilter.Location = new System.Drawing.Point(417, 355);
+            this.TextboxFilter.Name = "TextboxFilter";
+            this.TextboxFilter.Size = new System.Drawing.Size(48, 22);
+            this.TextboxFilter.TabIndex = 11;
+            this.TextboxFilter.Text = "[x]";
             // 
             // Form1
             // 
@@ -250,6 +284,7 @@ namespace OneNote2AnkiWinFormNET
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(477, 663);
+            this.Controls.Add(this.TextboxFilter);
             this.Controls.Add(this.ButtonReport);
             this.Controls.Add(this.ButtonRemCards);
             this.Controls.Add(this.CheckBoxReplace);
@@ -259,6 +294,8 @@ namespace OneNote2AnkiWinFormNET
             this.Controls.Add(this.CheckBoxHtml);
             this.Controls.Add(this.CheckBoxCLI);
             this.Controls.Add(this.ButtonMisc);
+            this.Controls.Add(this.ButtonShowTicked);
+            this.Controls.Add(this.ButtonTickMarked2);
             this.Controls.Add(this.ButtonTickMarked);
             this.Controls.Add(this.ButtonRefreshTree);
             this.Controls.Add(this.ButtonUpdOutline);
@@ -273,6 +310,7 @@ namespace OneNote2AnkiWinFormNET
             this.Text = "O2A: Select pages to process";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -295,6 +333,9 @@ namespace OneNote2AnkiWinFormNET
         private System.Windows.Forms.CheckBox CheckBoxReplace;
         private System.Windows.Forms.Button ButtonRefreshTree;
         private System.Windows.Forms.Button ButtonTickMarked;
+        private System.Windows.Forms.Button ButtonTickMarked2;
+        private System.Windows.Forms.Button ButtonShowTicked;
+        private System.Windows.Forms.TextBox TextboxFilter;
     }
 }
 
